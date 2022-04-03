@@ -28,6 +28,7 @@ const Tweet = () => {
           </div>
         </div>
         <div className="tweet-footer">
+          <span className="material-icons"> chat_bubble_outline </span>
           <span className="material-icons"> repeat </span>
           <span className="material-icons"> favorite_border </span>
           <span className="material-icons"> publish </span>
