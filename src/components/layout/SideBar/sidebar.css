@@ -1,7 +1,6 @@
 .sidebar {
   border-right: 1px solid var(--twitter-background);
   flex: 0.2;
-
   min-width: 250px;
   margin-top: 20px;
   padding-left: 20px;
@@ -12,6 +11,7 @@
   display: flex;
   align-items: center;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .sidebar-item .material-icons,
@@ -34,6 +34,10 @@
 
 .sidebar-item.active {
   color: var(--twitter-color);
+  background-color: var(--twitter-background);
+  border-radius: 30px;
+  color: var(--twitter-color);
+  transition: color 100ms ease-out;
 }
 
 .sidebar-tweet {

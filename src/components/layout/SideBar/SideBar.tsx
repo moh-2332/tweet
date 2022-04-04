@@ -1,5 +1,7 @@
 import React from "react";
 
+import { Link, NavLink } from "react-router-dom";
+
 import "./sidebar.css";
 
 import SIDE_BAR_ITEMS from "../../../constants/side-bar";
@@ -7,12 +9,15 @@ import SIDE_BAR_ITEMS from "../../../constants/side-bar";
 const SideBar = () => {
   return (
     <div className="sidebar">
-      <i className="fab fa-twitter"></i>
+      <Link to="/">
+        <i className="fab fa-twitter"></i>
+      </Link>
+
       {SIDE_BAR_ITEMS.map((item, index) => (
-        <div key={index} className="sidebar-item">
+        <NavLink key={index} to={item.to} className="sidebar-item">
           <span className="material-icons"> {item.icon} </span>
           <h2>{item.title}</h2>
-        </div>
+        </NavLink>
       ))}
       <button className="sidebar-tweet">Tweet</button>
     </div>
