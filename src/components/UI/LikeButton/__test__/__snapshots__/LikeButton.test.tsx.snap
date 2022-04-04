@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LikeButton tests Should match the snapshot 1`] = `
+<span
+  className="material-icons"
+  onClick={[Function]}
+>
+  favorite_border
+</span>
+`;

@@ -30,7 +30,7 @@ const Tweet: React.FC<{
       <div className="tweet-body">
         <div className="tweet-header">
           <div className="tweet-header-text">
-            <h3>
+            <h3 data-testid="tweet-account">
               {tweetInfo.account}
               <span className="tweet-header-time">
                 {Math.floor((Date.now() - tweetInfo.timestamp) / 1000)} seconds
@@ -39,7 +39,7 @@ const Tweet: React.FC<{
             </h3>
           </div>
           <div className="tweet-header-description">
-            <p>{tweetInfo.content}</p>
+            <p data-testid="tweet-content">{tweetInfo.content}</p>
           </div>
         </div>
         <div className="tweet-footer">
