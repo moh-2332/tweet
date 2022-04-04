@@ -1,0 +1,27 @@
+.tweetbox {
+  border-bottom: 8px solid var(--twitter-background);
+  padding: 15px;
+  position: sticky;
+  top: 55px;
+  background-color: white;
+  z-index: 100;
+  border: 1px solid var(--twitter-background);
+  padding: 15px 20px;
+}
+
+.actions {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.actions button {
+  border: none;
+  padding: 8px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.actions .active {
+  color: var(--twitter-color);
+}

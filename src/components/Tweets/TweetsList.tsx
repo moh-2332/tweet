@@ -1,20 +1,32 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 
 import TweetContext from "../../store/tweet-context";
-import TweetInfo from "./NewTweet/TweetInfo";
+import TweetInfo from "./TweetInfo/TweetInfo";
 import Tweet from "./Tweet/Tweet";
 
 const TweetsList = () => {
   const tweetCtx = useContext(TweetContext);
+  const [isFiltered, setIsFiltered] = useState(false);
 
   const changeLikeHandler = (id: string, value: boolean) => {
     tweetCtx.setLikeValue(id, value);
   };
 
+  const filterHandler = (filter: boolean) => {
+    setIsFiltered(filter);
+  };
+
+  const filteredList = isFiltered
+    ? tweetCtx.tweets.filter((tweet) => tweet.isLiked)
+    : tweetCtx.tweets;
+
   return (
     <React.Fragment>
-      <TweetInfo />
-      {tweetCtx.tweets.map((tweet) => (
+      <TweetInfo onFilter={filterHandler} isFiltered={isFiltered} />
+      {!filteredList.length && (
+        <p style={{ padding: 8 }}>There is not any tweets</p>
+      )}
+      {filteredList.map((tweet) => (
         <Tweet
           key={tweet.id}
           tweetInfo={tweet}
