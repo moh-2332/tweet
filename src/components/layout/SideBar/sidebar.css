@@ -22,7 +22,7 @@
 .sidebar-item h2 {
   font-weight: 800;
   font-size: 20px;
-  margin-right: 20px;
+  margin-right: 18px;
 }
 
 .sidebar-item:hover {
@@ -54,4 +54,23 @@
 .fa-twitter {
   color: var(--twitter-color);
   font-size: 30px;
+}
+
+.material-icons {
+  font-size: 20px;
+}
+
+@media screen and (max-width: 920px) {
+  .sidebar {
+    max-width: 100px;
+    min-width: 0;
+  }
+
+  .sidebar-item h2 {
+    display: none;
+  }
+
+  .sidebar-item.active {
+    border-radius: 50%;
+  }
 }
