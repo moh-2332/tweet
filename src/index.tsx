@@ -1,14 +1,16 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
+
 import "./index.css";
 import App from "./App";
 import TweetProvider from "./store/TweetProvider";
 
-ReactDOM.render(
+const container = document.getElementById("root") as HTMLElement;
+const root = createRoot(container);
+root.render(
   <React.StrictMode>
     <TweetProvider>
       <App />
     </TweetProvider>
-  </React.StrictMode>,
-  document.getElementById("root")
+  </React.StrictMode>
 );
