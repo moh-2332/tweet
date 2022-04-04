@@ -1,0 +1,10 @@
+.tweetbox {
+  border-bottom: 8px solid var(--twitter-background);
+  padding: 15px;
+  position: sticky;
+  top: 55px;
+  background-color: white;
+  z-index: 100;
+  border: 1px solid var(--twitter-background);
+  padding: 15px 20px;
+}

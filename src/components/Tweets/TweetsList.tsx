@@ -4,12 +4,15 @@ import { interval, merge } from "rxjs";
 import { map } from "rxjs/operators";
 
 import TweetContext from "../../store/tweet-context";
-import AppBar from "../layout/AppBar/AppBar";
-import NewTweet from "./NewTweet/NewTweet";
+import TweetInfo from "./NewTweet/TweetInfo";
 import Tweet from "./Tweet/Tweet";
 
 const TweetsList = () => {
   const tweetCtx = useContext(TweetContext);
+
+  const changeLikeHandler = (id: number, value: boolean) => {
+    tweetCtx.setLikeValue(id, value);
+  };
 
   useEffect(() => {
     // const createTweetSource = (
@@ -37,17 +40,14 @@ const TweetsList = () => {
 
   return (
     <React.Fragment>
-      <NewTweet />
-      <Tweet />
-      <Tweet />
-      <Tweet />
-      <Tweet />
-      <Tweet />
-      <Tweet />
-      <Tweet />
-      <Tweet />
-      <Tweet />
-      <Tweet />
+      <TweetInfo />
+      {tweetCtx.tweets.map((tweet) => (
+        <Tweet
+          key={tweet.id}
+          tweetInfo={tweet}
+          onLikeToggle={changeLikeHandler}
+        />
+      ))}
     </React.Fragment>
   );
 };
