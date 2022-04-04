@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useCallback, useContext, useState } from "react";
 
 import TweetContext from "../../store/tweet-context";
 import TweetInfo from "./TweetInfo/TweetInfo";
@@ -12,9 +12,9 @@ const TweetsList = () => {
     tweetCtx.setLikeValue(id, value);
   };
 
-  const filterHandler = (filter: boolean) => {
+  const filterHandler = useCallback((filter: boolean) => {
     setIsFiltered(filter);
-  };
+  }, []);
 
   const filteredList = isFiltered
     ? tweetCtx.tweets.filter((tweet) => tweet.isLiked)

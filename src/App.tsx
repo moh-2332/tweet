@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 
 import "./App.css";
+
 import SideBar from "./components/layout/SideBar/SideBar";
 import Widget from "./components/layout/Widget/Widget";
 import TweetsPage from "./pages/TweetsPage";
