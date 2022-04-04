@@ -58,7 +58,6 @@ const tweetReducer = (
   }
 
   if (action.type === "SET_LIKE") {
-    let likesCounter = 0;
     return {
       ...state,
       tweets: state.tweets.map((tweet) => {
@@ -66,16 +65,12 @@ const tweetReducer = (
           tweet.isLiked = action.payload.value;
         }
 
-        if (tweet.isLiked) {
-          likesCounter++;
-        }
-
         return tweet;
       }),
       totalLikesCount: action.payload.value
         ? state.totalLikesCount + 1
         : state.totalLikesCount - 1,
-      tweetsLikesCount: likesCounter,
+      tweetsLikesCount: state.tweets.filter((tweet) => tweet.isLiked).length,
     };
   }
 
