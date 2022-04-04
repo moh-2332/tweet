@@ -1,7 +1,31 @@
-import React, { useReducer } from "react";
+import React, { useEffect, useReducer } from "react";
 import { TweetDef } from "../models/TweetDef";
 
+import { interval, merge } from "rxjs";
+import { map } from "rxjs/operators";
+
+import { v4 as uuid } from "uuid";
+
 import TweetContext from "./tweet-context";
+
+const createTweetSource = (
+  frequency: number,
+  account: string,
+  attribute: string
+) => {
+  return interval(frequency).pipe(
+    map((i) => ({
+      account,
+      timestamp: Date.now(),
+      content: `${attribute} Tweet number ${i + 1}`,
+    }))
+  );
+};
+const tweets = merge(
+  createTweetSource(5000, "AwardsDarwin", "Facepalm"),
+  createTweetSource(3000, "iamdevloper", "Expert"),
+  createTweetSource(5000, "CommitStrip", "Funny")
+);
 
 interface ITweet {
   tweets: TweetDef[];
@@ -10,22 +34,7 @@ interface ITweet {
 }
 
 const initialState: ITweet = {
-  tweets: [
-    {
-      id: 1,
-      account: "realDonaldTrump",
-      timestamp: 1649074915524,
-      content: "Stupid Tweet number 3",
-      isLiked: false,
-    },
-    {
-      id: 2,
-      account: "realDonaldTrump",
-      timestamp: 1649070696601,
-      content: "Stupid Tweet number 3",
-      isLiked: false,
-    },
-  ],
+  tweets: [],
   totalLikesCount: 0,
   tweetsLikesCount: 0,
 };
@@ -37,7 +46,14 @@ const tweetReducer = (
   if (action.type === "ADD") {
     return {
       ...state,
-      tweets: [action.payload, ...state.tweets],
+      tweets: [
+        action.payload.tweet,
+        ...state.tweets.filter(
+          (tweet) =>
+            (Date.now() - tweet.timestamp) / 1000 <= action.payload.seconds
+        ),
+      ],
+      tweetsLikesCount: state.tweets.filter((tweet) => tweet.isLiked).length,
     };
   }
 
@@ -72,15 +88,23 @@ const TweetProvider: React.FC = ({ children }) => {
     initialState
   );
 
-  const addToTweetsHandler = (tweet: TweetDef) => {
-    dispatchTweetAction({ type: "ADD", payload: tweet });
+  useEffect(() => {
+    tweets.subscribe((result) => {
+      dispatchTweetAction({
+        type: "ADD",
+        payload: {
+          tweet: { ...result, id: uuid(), isLiked: false },
+          seconds: 30,
+        },
+      });
+    });
+  }, []);
+
+  const addToTweetsHandler = (tweet: TweetDef, seconds: number) => {
+    dispatchTweetAction({ type: "ADD", payload: { tweet, seconds } });
   };
 
-  const removeFromTweetsHandler = (timeStamp: number) => {
-    dispatchTweetAction({ type: "REMOVE", payload: timeStamp });
-  };
-
-  const setLikeHandler = (id: number, value: boolean) => {
+  const setLikeHandler = (id: string, value: boolean) => {
     dispatchTweetAction({ type: "SET_LIKE", payload: { id, value } });
   };
 
@@ -89,7 +113,6 @@ const TweetProvider: React.FC = ({ children }) => {
     totalLikesCount: tweetState.totalLikesCount,
     tweetsLikesCount: tweetState.tweetsLikesCount,
     addToTweets: addToTweetsHandler,
-    removeFromTweets: removeFromTweetsHandler,
     setLikeValue: setLikeHandler,
   };
 

@@ -1,5 +1,5 @@
 export interface TweetDef {
-  id: number;
+  id: string;
   account: string;
   timestamp: number;
   content: string;

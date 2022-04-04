@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { TweetDef } from "../../../models/TweetDef";
 import LikeButton from "../../UI/LikeButton/LikeButton";
 
@@ -6,7 +6,7 @@ import "./tweet.css";
 
 const Tweet: React.FC<{
   tweetInfo: TweetDef;
-  onLikeToggle: (id: number, value: boolean) => void;
+  onLikeToggle: (id: string, value: boolean) => void;
 }> = ({ tweetInfo, onLikeToggle }) => {
   const changeLikeHandler = (value: boolean) => {
     onLikeToggle(tweetInfo.id, value);

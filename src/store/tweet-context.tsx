@@ -5,16 +5,14 @@ const TweetContext = React.createContext<{
   tweets: TweetDef[];
   totalLikesCount: number;
   tweetsLikesCount: number;
-  addToTweets: (tweet: TweetDef) => void;
-  removeFromTweets: (timeStamp: number) => void;
-  setLikeValue: (id: number, value: boolean) => void;
+  addToTweets: (tweet: TweetDef, seconds: number) => void;
+  setLikeValue: (id: string, value: boolean) => void;
 }>({
   tweets: [],
   totalLikesCount: 0,
   tweetsLikesCount: 0,
-  addToTweets: (tweet: TweetDef) => {},
-  removeFromTweets: (timeStamp: number) => {},
-  setLikeValue: (id: number, value: boolean) => {},
+  addToTweets: (tweet: TweetDef, seconds: number) => {},
+  setLikeValue: (id: string, value: boolean) => {},
 });
 
 export default TweetContext;
