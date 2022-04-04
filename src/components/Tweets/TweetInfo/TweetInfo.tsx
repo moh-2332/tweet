@@ -25,6 +25,7 @@ const TweetInfo: React.FC<{
         <button onClick={filterHandler}>
           {isFiltered ? "All Tweets" : "Liked Tweets"}
         </button>
+        <button onClick={() => tweetCtx.clearTweets()}>Clear the list</button>
       </div>
     </div>
   );

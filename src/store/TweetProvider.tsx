@@ -41,7 +41,7 @@ const initialState: ITweet = {
 
 const tweetReducer = (
   state: ITweet,
-  action: { type: string; payload: any }
+  action: { type: string; payload?: any }
 ) => {
   if (action.type === "ADD") {
     return {
@@ -74,6 +74,10 @@ const tweetReducer = (
     };
   }
 
+  if (action.type === "CLEAR") {
+    return initialState;
+  }
+
   return state;
 };
 
@@ -103,12 +107,17 @@ const TweetProvider: React.FC = ({ children }) => {
     dispatchTweetAction({ type: "SET_LIKE", payload: { id, value } });
   };
 
+  const clearTweetshandler = () => {
+    dispatchTweetAction({ type: "CLEAR" });
+  };
+
   const tweetContext = {
     tweets: tweetState.tweets,
     totalLikesCount: tweetState.totalLikesCount,
     tweetsLikesCount: tweetState.tweetsLikesCount,
     addToTweets: addToTweetsHandler,
     setLikeValue: setLikeHandler,
+    clearTweets: clearTweetshandler,
   };
 
   return (
