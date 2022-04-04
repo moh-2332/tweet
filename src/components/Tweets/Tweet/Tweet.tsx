@@ -4,6 +4,15 @@ import LikeButton from "../../UI/LikeButton/LikeButton";
 
 import "./tweet.css";
 
+const AVATARS: { [key: string]: string } = {
+  AwardsDarwin:
+    "https://pbs.twimg.com/profile_images/1419007842498097156/Q9ZGH20f_400x400.jpg",
+  iamdevloper:
+    "https://pbs.twimg.com/profile_images/1178631635606151168/yIlrcg4o_400x400.jpg",
+  CommitStrip:
+    "https://pbs.twimg.com/profile_images/799176331623800832/ggd6_JbJ_400x400.jpg",
+};
+
 const Tweet: React.FC<{
   tweetInfo: TweetDef;
   onLikeToggle: (id: string, value: boolean) => void;
@@ -15,10 +24,7 @@ const Tweet: React.FC<{
   return (
     <div className="tweet">
       <div className="tweet-avatar">
-        <img
-          src="https://i.pinimg.com/originals/a6/58/32/a65832155622ac173337874f02b218fb.png"
-          alt=""
-        />
+        <img src={AVATARS[tweetInfo.account]} alt={tweetInfo.account} />
       </div>
 
       <div className="tweet-body">
@@ -26,8 +32,7 @@ const Tweet: React.FC<{
           <div className="tweet-header-text">
             <h3>
               {tweetInfo.account}
-              <span className="tweet-header-special">
-                <span className="material-icons tweet-badge"> verified </span>
+              <span className="tweet-header-time">
                 {Math.floor((Date.now() - tweetInfo.timestamp) / 1000)} seconds
                 ago
               </span>

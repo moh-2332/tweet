@@ -34,10 +34,11 @@
   margin-right: 5px;
 }
 
-.tweet-header-special {
+.tweet-header-time {
   font-weight: 600;
   font-size: 12px;
   color: gray;
+  margin-left: 10px;
 }
 
 .tweet-header-text h3 {
